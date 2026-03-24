@@ -1,0 +1,191 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.75rem;
+  
+  /* Fastika Brand Colors */
+  --fastika-green: #657f66;
+  --fastika-green-dark: #4a634b;
+  --fastika-green-light: #7a997b;
+  --fastika-orange: #f8b97e;
+  --fastika-orange-dark: #e5a56d;
+  --fastika-cream: #faf8f5;
+  --fastika-cream-dark: #f5f0e8;
+  
+  /* shadcn/ui variables - Green Theme */
+  --background: 40 20% 98%;
+  --foreground: 150 10% 12%;
+  --card: 40 25% 99%;
+  --card-foreground: 150 10% 12%;
+  --popover: 40 25% 99%;
+  --popover-foreground: 150 10% 12%;
+  /* Primary: Green #657f66 */
+  --primary: 122 14% 45%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 40 15% 94%;
+  --secondary-foreground: 150 10% 15%;
+  --muted: 40 10% 93%;
+  --muted-foreground: 150 5% 40%;
+  /* Accent: Orange #f8b97e */
+  --accent: 30 90% 73%;
+  --accent-foreground: 30 50% 18%;
+  --destructive: 0 85% 60%;
+  --border: 40 15% 88%;
+  --input: 40 15% 88%;
+  --ring: 122 14% 45%;
+  --chart-1: 122 14% 45%;
+  --chart-2: 30 90% 73%;
+  --chart-3: 122 10% 60%;
+  --chart-4: 40 20% 90%;
+  --chart-5: 120 10% 30%;
+
+  /* Spacing scale */
+  --space-section: 4rem;
+  --space-block: 2rem;
+  --space-element: 1rem;
+
+  /* Shadow scale */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-card-hover: 0 10px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+  --shadow-float: 0 20px 40px -10px rgb(0 0 0 / 0.1);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  
+  /* Brand Color Tokens */
+  --color-brand: var(--fastika-green);
+  --color-brand-dark: var(--fastika-green-dark);
+  --color-brand-light: var(--fastika-green-light);
+  --color-accent-orange: var(--fastika-orange);
+  --color-accent-orange-dark: var(--fastika-orange-dark);
+  --color-cream: var(--fastika-cream);
+}
+
+/* ─── Base Styles ─────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(180deg, var(--fastika-cream) 0%, var(--fastika-cream-dark) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* ─── RTL Support ─────────────────────────────────── */
+[dir="rtl"] {
+  text-align: right;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
+
+/* ─── Focus Utilities ─────────────────────────────── */
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring));
+  border-radius: var(--radius);
+}
+
+/* ─── Custom Scrollbar ────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ─── Brand Utility Classes ───────────────────────── */
+.bg-brand {
+  background-color: var(--fastika-green);
+}
+
+.bg-brand-dark {
+  background-color: var(--fastika-green-dark);
+}
+
+.bg-brand-light {
+  background-color: var(--fastika-green-light);
+}
+
+.text-brand {
+  color: var(--fastika-green);
+}
+
+.text-brand-dark {
+  color: var(--fastika-green-dark);
+}
+
+.text-accent-orange {
+  color: var(--fastika-orange);
+}
+
+.bg-accent-orange {
+  background-color: var(--fastika-orange);
+}
+
+.border-brand {
+  border-color: var(--fastika-green);
+}
+
+/* ─── Brand Gradient ──────────────────────────────── */
+.brand-gradient {
+  background: linear-gradient(135deg, var(--fastika-green-dark) 0%, var(--fastika-green) 50%, var(--fastika-green-light) 100%);
+}
+
+.brand-gradient-subtle {
+  background: linear-gradient(135deg, var(--fastika-cream) 0%, var(--fastika-cream-dark) 100%);
+}
+
+/* ─── Reduced Motion ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
