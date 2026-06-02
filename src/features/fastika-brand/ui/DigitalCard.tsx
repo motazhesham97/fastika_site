@@ -16,19 +16,16 @@ import {
   Mail, 
   UserPlus, 
   Share2, 
-  Check,
-  ChevronLeft
+  Check
 } from "lucide-react";
-import { Separator } from "@/shared/ui/separator";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Ambient background floating particles for a living UI environment
+// Ambient background floating particles for a living premium UI environment
 const floatingParticles = [
-  { size: "w-40 h-40 sm:w-60 sm:h-60", color: "bg-[#657f66]/10", x: ["-10%", "110%"], y: ["10%", "30%"], duration: 30 },
-  { size: "w-48 h-48 sm:w-72 sm:h-72", color: "bg-[#f8b97e]/8", x: ["110%", "-10%"], y: ["70%", "50%"], duration: 35 },
-  { size: "w-56 h-56 sm:w-80 sm:h-80", color: "bg-[#657f66]/8", x: ["30%", "60%"], y: ["-10%", "110%"], duration: 40 },
-  { size: "w-32 h-32 sm:w-48 sm:h-48", color: "bg-[#f8b97e]/10", x: ["90%", "20%"], y: ["110%", "-10%"], duration: 28 },
+  { size: "w-72 h-72 sm:w-96 sm:h-96", color: "bg-[#657f66]/15", x: ["-10%", "90%"], y: ["10%", "40%"], duration: 25 },
+  { size: "w-80 h-80 sm:w-[450px] sm:h-[450px]", color: "bg-[#f8b97e]/12", x: ["100%", "10%"], y: ["60%", "30%"], duration: 30 },
+  { size: "w-64 h-64 sm:w-80 sm:h-80", color: "bg-[#657f66]/10", x: ["20%", "70%"], y: ["90%", "10%"], duration: 35 },
 ];
 
 export default function DigitalCard() {
@@ -37,8 +34,8 @@ export default function DigitalCard() {
   // 3D Parallax Tilt Effect for Desktop Hover
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(mouseY, [-250, 250], [8, -8]), { damping: 35, stiffness: 220 });
-  const rotateY = useSpring(useTransform(mouseX, [-200, 200], [-8, 8]), { damping: 35, stiffness: 220 });
+  const rotateX = useSpring(useTransform(mouseY, [-250, 250], [6, -6]), { damping: 40, stiffness: 200 });
+  const rotateY = useSpring(useTransform(mouseX, [-200, 200], [-6, 6]), { damping: 40, stiffness: 200 });
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     const el = event.currentTarget;
@@ -97,19 +94,81 @@ export default function DigitalCard() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 260, damping: 24 } },
   };
 
+  const quickActions = [
+    {
+      id: "phone",
+      label: "اتصال",
+      icon: Phone,
+      href: `tel:${contactInfo.phone.replace(/\s/g, "")}`,
+      bg: "bg-[#657f66]/10",
+      hoverBorder: "hover:border-[#657f66]/40",
+      hoverText: "group-hover:text-[#7a997b]"
+    },
+    {
+      id: "map",
+      label: "الموقع",
+      icon: MapPin,
+      href: "https://maps.google.com/?q=Ibb+Yemen",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      bg: "bg-[#f8b97e]/15",
+      hoverBorder: "hover:border-[#f8b97e]/40",
+      hoverText: "group-hover:text-[#f8b97e]"
+    },
+    {
+      id: "email",
+      label: "البريد",
+      icon: Mail,
+      href: `mailto:${contactInfo.email}`,
+      bg: "bg-[#657f66]/10",
+      hoverBorder: "hover:border-[#657f66]/40",
+      hoverText: "group-hover:text-[#7a997b]"
+    },
+    {
+      id: "save",
+      label: "حفظ",
+      icon: UserPlus,
+      onClick: handleSaveContact,
+      bg: "bg-[#f8b97e]/15",
+      hoverBorder: "hover:border-[#f8b97e]/40",
+      hoverText: "group-hover:text-[#f8b97e]"
+    },
+  ];
+
+  const socialGlows: Record<string, { bg: string, border: string, text: string, gradient: string }> = {
+    "انستقرام": {
+      bg: "group-hover:bg-pink-500/10",
+      border: "group-hover:border-pink-500/30",
+      text: "group-hover:text-pink-400",
+      gradient: "from-pink-500/20 to-orange-500/20"
+    },
+    "تيك توك": {
+      bg: "group-hover:bg-rose-500/10",
+      border: "group-hover:border-rose-500/30",
+      text: "group-hover:text-rose-400",
+      gradient: "from-rose-500/20 to-zinc-800/20"
+    },
+    "فيسبوك": {
+      bg: "group-hover:bg-blue-600/10",
+      border: "group-hover:border-blue-600/30",
+      text: "group-hover:text-blue-400",
+      gradient: "from-blue-600/20 to-blue-800/20"
+    }
+  };
+
   return (
-    <div className="bg-gradient-to-b from-[#faf8f5] via-[#f5eedf] to-[#ebe1cd] min-h-screen relative flex flex-col items-center justify-center sm:py-10 overflow-x-hidden">
+    <div className="bg-gradient-to-b from-[#0E1510] via-[#0A0E0B] to-[#090503] min-h-screen relative flex flex-col items-center justify-center py-6 px-4 sm:py-12 overflow-x-hidden">
       
       {/* 1. Ambient Background Particles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {floatingParticles.map((p, idx) => (
           <motion.div
             key={idx}
-            className={`absolute rounded-full pointer-events-none blur-[90px] ${p.size} ${p.color}`}
+            className={`absolute rounded-full pointer-events-none blur-[100px] sm:blur-[130px] ${p.size} ${p.color}`}
             animate={{
               x: p.x,
               y: p.y,
@@ -124,7 +183,7 @@ export default function DigitalCard() {
         ))}
       </div>
 
-      {/* 2. Responsive Business Card Container */}
+      {/* 2. Responsive Glassmorphism Card Container */}
       <motion.div
         style={{ 
           rotateX, 
@@ -134,257 +193,220 @@ export default function DigitalCard() {
         }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        initial={{ opacity: 0, y: 40, scale: 0.98 }}
+        initial={{ opacity: 0, y: 30, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.7, ease }}
-        className="w-full sm:max-w-md z-10 p-[1.5px] bg-gradient-to-tr from-[#657f66]/30 via-[#f8b97e]/60 to-[#657f66]/30 hover:via-[#f8b97e] rounded-none sm:rounded-[28px] transition-all duration-700 shadow-2xl flex flex-col flex-1 sm:flex-initial"
+        transition={{ duration: 0.6, ease }}
+        className="w-full sm:max-w-md z-10 p-[1px] bg-gradient-to-tr from-white/10 via-white/5 to-white/10 hover:via-[#f8b97e]/30 rounded-[32px] transition-all duration-700 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col flex-1 sm:flex-initial"
       >
         {/* Inner Card Wrapper */}
         <div 
-          className="bg-white/90 backdrop-blur-xl sm:rounded-[26px] overflow-hidden flex flex-col flex-1 sm:flex-initial"
+          className="bg-black/40 backdrop-blur-2xl rounded-[31px] overflow-hidden flex flex-col flex-1 sm:flex-initial border border-white/5"
           style={{ transform: "translateZ(10px)" }}
         >
-          {/* Card Header (Matches the homepage Header.tsx EXACTLY) */}
-          <div className="relative brand-gradient text-white pt-10 pb-8 px-6 text-center overflow-hidden">
-            <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-              <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-white/5" />
-              <div className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full bg-white/5" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-white/[0.02]" />
-            </div>
+          {/* Card Header */}
+          <div className="relative pt-12 pb-6 px-6 text-center overflow-hidden">
+            {/* Header Radial Aura */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-[#f8b97e]/5 blur-3xl pointer-events-none" />
 
             <div className="relative flex flex-col items-center">
-              {/* Logo */}
+              {/* Logo with Golden Orbit Ring */}
               <motion.div
-                initial={{ scale: 0.7, opacity: 0 }}
+                initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.15 }}
-                className="relative w-24 h-24 sm:w-28 sm:h-28 mb-4 cursor-pointer"
-                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
+                className="relative w-28 h-28 mb-5 cursor-pointer group"
+                whileHover={{ scale: 1.03 }}
               >
-                <div className="absolute inset-0 rounded-full bg-accent-orange/20 animate-pulse" />
-                <Image
-                  src="/Asset 1.png"
-                  alt={brandInfo.nameAr}
-                  fill
-                  priority
-                  className="object-contain rounded-full ring-4 ring-white/20 shadow-float"
-                />
+                {/* Double Glow Layer */}
+                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#f8b97e] to-[#657f66] opacity-30 blur-md group-hover:opacity-60 transition duration-700 animate-pulse" />
+                
+                {/* Rotating Border Frame */}
+                <div className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-tr from-[#657f66] via-[#f8b97e] to-[#657f66] animate-[spin_10s_linear_infinite]" />
+                
+                {/* Image Container */}
+                <div className="relative w-full h-full rounded-full bg-black/80 p-1 flex items-center justify-center overflow-hidden">
+                  <Image
+                    src="/Asset 1.png"
+                    alt={brandInfo.nameAr}
+                    fill
+                    priority
+                    className="object-contain p-2 rounded-full"
+                  />
+                </div>
               </motion.div>
 
               {/* Brand Title & Subtitle */}
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1 text-white drop-shadow-sm">
+              <h1 className="text-3xl font-black tracking-tight text-white mb-0.5">
                 {brandInfo.nameAr}
               </h1>
-              <p className="text-accent-orange font-semibold text-sm sm:text-base tracking-wide drop-shadow-sm">
-                Fastika
+              <p className="text-[#f8b97e] font-medium text-xs tracking-widest uppercase opacity-95">
+                Fastika Chocolate
               </p>
 
-              {/* Decorative Separator */}
-              <div className="flex items-center justify-center gap-3 mt-4" aria-hidden="true">
-                <Separator className="w-12 bg-accent-orange/40" />
-                <div className="w-2 h-2 rounded-full bg-accent-orange animate-pulse" />
-                <Separator className="w-12 bg-accent-orange/40" />
+              {/* Custom Elegant Divider */}
+              <div className="flex items-center justify-center gap-3 my-4.5" aria-hidden="true">
+                <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#f8b97e]/40" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#f8b97e] shadow-[0_0_8px_#f8b97e] animate-pulse" />
+                <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#f8b97e]/40" />
               </div>
 
-              {/* Description inside header for unified framing */}
-              <p className="text-white/90 text-xs sm:text-sm leading-relaxed max-w-xs mx-auto mt-4 font-medium drop-shadow-sm">
+              {/* Description */}
+              <p className="text-white/70 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto font-light">
                 {brandInfo.description}
               </p>
             </div>
           </div>
 
           {/* Card Body */}
-          <div className="p-6 flex flex-col gap-5" style={{ transform: "translateZ(20px)" }}>
+          <div className="px-6 pb-8 flex flex-col gap-6" style={{ transform: "translateZ(20px)" }}>
             
             {/* Staggered Actions List */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="show"
-              className="w-full flex flex-col gap-4"
+              className="w-full flex flex-col gap-6"
             >
-              {/* PRIMARY CTAS SECTION: Save Contact & WhatsApp side-by-side */}
-              <motion.div variants={itemVariants} className="grid grid-cols-2 gap-3">
-                {/* Save Contact (Green Button) */}
-                <button
-                  onClick={handleSaveContact}
-                  className="relative overflow-hidden bg-gradient-to-r from-[#657f66] to-[#4a634b] hover:opacity-95 text-white font-bold py-4 px-3 rounded-2xl flex items-center justify-center gap-2 shadow-md shadow-[#657f66]/20 transition-all duration-200 active:scale-[0.98] border-none text-sm cursor-pointer group"
-                >
-                  <motion.div
-                    className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 pointer-events-none"
-                    initial={{ left: "-100%" }}
-                    whileHover={{ left: "100%" }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                  />
-                  <UserPlus className="w-4.5 h-4.5 group-hover:scale-110 transition-transform" />
-                  <span>حفظ الاتصال</span>
-                </button>
-
-                {/* WhatsApp Chat (WhatsApp Green Button) */}
+              {/* PRIMARY CTA: WhatsApp Order (Pulsing, Glowing Orange-Gold Button) */}
+              <motion.div variants={itemVariants}>
                 <a
                   href={`https://wa.me/${contactInfo.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative overflow-hidden bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-4 px-3 rounded-2xl flex items-center justify-center gap-2 shadow-md shadow-green-500/10 transition-all duration-200 active:scale-[0.98] text-sm cursor-pointer group text-center"
+                  className="w-full relative overflow-hidden bg-gradient-to-r from-[#f8b97e] to-[#e5a56d] text-black font-extrabold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-[0_4px_25px_rgba(248,185,126,0.3)] hover:shadow-[0_4px_30px_rgba(248,185,126,0.5)] group text-center"
                 >
-                  <motion.div
-                    className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 pointer-events-none"
-                    initial={{ left: "-100%" }}
-                    whileHover={{ left: "100%" }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                  />
-                  <MessageCircle className="w-4.5 h-4.5 group-hover:rotate-12 transition-transform" />
-                  <span>مراسلة واتساب</span>
+                  <div className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-white/35 to-transparent -skew-x-12 pointer-events-none -left-full group-hover:left-full transition-all duration-1000 ease-in-out" />
+                  <MessageCircle className="w-5 h-5 text-black transition-transform group-hover:rotate-12 duration-300" />
+                  <span className="text-sm tracking-wide">تواصل معنا واطلب عبر واتساب</span>
+                  
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-black"></span>
+                  </span>
                 </a>
               </motion.div>
 
-              {/* SECONDARY CONTACT CHANNELS: Vertical list */}
-              <motion.div variants={itemVariants} className="mt-1">
-                <h2 className="text-xs font-bold text-[#4a634b]/50 uppercase tracking-widest px-1 text-right mb-2">
-                  روابط الاتصال الأخرى
-                </h2>
-              </motion.div>
+              {/* QUICK ACTIONS BAR (Horizontal Row replacing separate contact items) */}
+              <motion.div variants={itemVariants} className="flex flex-col gap-3">
+                <div className="flex items-center justify-between px-1">
+                  <div className="h-[1px] flex-1 bg-white/5" />
+                  <h2 className="text-[10px] font-bold text-white/30 uppercase tracking-widest px-3 text-center">
+                    قنوات الاتصال المباشر
+                  </h2>
+                  <div className="h-[1px] flex-1 bg-white/5" />
+                </div>
+                
+                <div className="grid grid-cols-4 gap-2 pt-1">
+                  {quickActions.map((action) => {
+                    const Icon = action.icon;
+                    const content = (
+                      <div className="flex flex-col items-center group cursor-pointer">
+                        <div className={`w-12 h-12 rounded-full bg-white/[0.03] border border-white/10 ${action.hoverBorder} flex items-center justify-center text-white/80 ${action.hoverText} transition-all duration-300 shadow-md relative overflow-hidden group-hover:scale-105 active:scale-95`}>
+                          <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${action.bg}`} />
+                          <Icon className="w-5 h-5 relative z-10 transition-transform group-hover:rotate-12 duration-300" />
+                        </div>
+                        <span className={`text-[10px] text-white/40 ${action.hoverText} font-medium mt-1.5 transition-colors duration-300`}>
+                          {action.label}
+                        </span>
+                      </div>
+                    );
 
-              {/* Phone Call Card */}
-              <motion.div variants={itemVariants}>
-                <a
-                  href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
-                  className="w-full relative overflow-hidden bg-white border border-[#657f66]/10 hover:border-[#657f66]/30 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3.5 flex items-center justify-between group transition-all duration-300 active:scale-[0.99] shadow-[var(--shadow-card)] cursor-pointer"
-                >
-                  <motion.div
-                    className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-[#657f66]/5 to-transparent -skew-x-12 pointer-events-none"
-                    initial={{ left: "-100%" }}
-                    whileHover={{ left: "100%" }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                  />
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#657f66]/10 flex items-center justify-center transition-colors group-hover:bg-[#657f66]/20">
-                      <Phone className="w-4.5 h-4.5 text-[#657f66]" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-bold text-[#4a634b]">اتصال هاتفي مباشر</div>
-                      <div className="text-xs text-[#4a634b]/60">{contactInfo.phone}</div>
-                    </div>
-                  </div>
-                  <ChevronLeft className="w-4 h-4 text-[#4a634b]/30 group-hover:text-[#4a634b]/70 transition-colors" />
-                </a>
-              </motion.div>
+                    if (action.onClick) {
+                      return (
+                        <button key={action.id} onClick={action.onClick} className="focus:outline-none bg-transparent border-none p-0 m-0 w-full">
+                          {content}
+                        </button>
+                      );
+                    }
 
-              {/* Google Maps Location Card */}
-              <motion.div variants={itemVariants}>
-                <a
-                  href="https://maps.google.com/?q=Ibb+Yemen"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full relative overflow-hidden bg-white border border-[#657f66]/10 hover:border-[#657f66]/30 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3.5 flex items-center justify-between group transition-all duration-300 active:scale-[0.99] shadow-[var(--shadow-card)] cursor-pointer"
-                >
-                  <motion.div
-                    className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-[#f8b97e]/15 to-transparent -skew-x-12 pointer-events-none"
-                    initial={{ left: "-100%" }}
-                    whileHover={{ left: "100%" }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                  />
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#f8b97e]/15 flex items-center justify-center transition-colors group-hover:bg-[#f8b97e]/30">
-                      <MapPin className="w-4.5 h-4.5 text-[#e5a56d]" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-bold text-[#4a634b]">موقعنا على الخريطة</div>
-                      <div className="text-xs text-[#4a634b]/60">{contactInfo.location}</div>
-                    </div>
-                  </div>
-                  <ChevronLeft className="w-4 h-4 text-[#4a634b]/30 group-hover:text-[#4a634b]/70 transition-colors" />
-                </a>
-              </motion.div>
-
-              {/* Email Card */}
-              <motion.div variants={itemVariants}>
-                <a
-                  href={`mailto:${contactInfo.email}`}
-                  className="w-full relative overflow-hidden bg-white border border-[#657f66]/10 hover:border-[#657f66]/30 hover:bg-white/95 backdrop-blur-md rounded-2xl p-3.5 flex items-center justify-between group transition-all duration-300 active:scale-[0.99] shadow-[var(--shadow-card)] cursor-pointer"
-                >
-                  <motion.div
-                    className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-[#657f66]/5 to-transparent -skew-x-12 pointer-events-none"
-                    initial={{ left: "-100%" }}
-                    whileHover={{ left: "100%" }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                  />
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#657f66]/10 flex items-center justify-center transition-colors group-hover:bg-[#657f66]/20">
-                      <Mail className="w-4.5 h-4.5 text-[#657f66]" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-bold text-[#4a634b]">راسلنا إلكترونياً</div>
-                      <div className="text-xs text-[#4a634b]/60">{contactInfo.email}</div>
-                    </div>
-                  </div>
-                  <ChevronLeft className="w-4 h-4 text-[#4a634b]/30 group-hover:text-[#4a634b]/70 transition-colors" />
-                </a>
-              </motion.div>
-
-              {/* SOCIAL MEDIA SECTION: 3-column horizontal grid */}
-              <motion.div variants={itemVariants} className="mt-2">
-                <h2 className="text-xs font-bold text-[#4a634b]/50 uppercase tracking-widest px-1 text-right mb-2">
-                  تابعنا على حساباتنا
-                </h2>
-              </motion.div>
-
-              <motion.div 
-                variants={itemVariants} 
-                className="grid grid-cols-3 gap-2.5"
-              >
-                {socialLinks
-                  .filter(link => link.platform !== "واتساب" && link.platform !== "الموقع الإلكتروني")
-                  .map((link) => {
-                    const SocialIcon = link.icon;
                     return (
                       <a
-                        key={link.platform}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-white border border-[#657f66]/10 hover:border-[#657f66]/30 hover:bg-white p-3 rounded-2xl flex flex-col items-center justify-center gap-1.5 backdrop-blur-sm group transition-all duration-300 active:scale-[0.97] shadow-[var(--shadow-card)] cursor-pointer text-center"
+                        key={action.id}
+                        href={action.href}
+                        target={action.target}
+                        rel={action.rel}
+                        className="no-underline focus:outline-none w-full"
                       >
-                        <div className="w-8 h-8 rounded-lg bg-[#657f66]/10 flex items-center justify-center group-hover:bg-[#657f66] transition-all">
-                          <SocialIcon className="w-4 h-4 text-[#657f66] group-hover:text-white transition-colors" />
-                        </div>
-                        <span className="text-xs font-bold text-[#4a634b]">{link.platform}</span>
-                        <span className="text-[9px] text-[#4a634b]/50 group-hover:text-[#657f66] transition-colors truncate w-full max-w-full">
-                          {link.username}
-                        </span>
+                        {content}
                       </a>
                     );
                   })}
+                </div>
               </motion.div>
 
-              {/* Share Card Button */}
-              <motion.div variants={itemVariants} className="mt-3">
+              {/* SOCIAL MEDIA SECTION (Beautiful high-fidelity tiles) */}
+              <motion.div variants={itemVariants} className="flex flex-col gap-3 mt-1">
+                <div className="flex items-center justify-between px-1">
+                  <div className="h-[1px] flex-1 bg-white/5" />
+                  <h2 className="text-[10px] font-bold text-white/30 uppercase tracking-widest px-3 text-center">
+                    تابع حساباتنا الرسمية
+                  </h2>
+                  <div className="h-[1px] flex-1 bg-white/5" />
+                </div>
+
+                <div className="grid grid-cols-3 gap-2.5 pt-1">
+                  {socialLinks
+                    .filter(link => link.platform !== "واتساب" && link.platform !== "الموقع الإلكتروني")
+                    .map((link) => {
+                      const SocialIcon = link.icon;
+                      const glows = socialGlows[link.platform] || {
+                        bg: "group-hover:bg-white/5",
+                        border: "group-hover:border-white/20",
+                        text: "group-hover:text-white",
+                        gradient: "from-white/10 to-transparent"
+                      };
+                      return (
+                        <a
+                          key={link.platform}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`bg-white/[0.03] border border-white/5 ${glows.border} ${glows.bg} p-3.5 rounded-2xl flex flex-col items-center justify-center gap-1.5 backdrop-blur-md group transition-all duration-300 active:scale-[0.97] shadow-lg cursor-pointer text-center relative overflow-hidden`}
+                        >
+                          {/* Inside Glow Mask */}
+                          <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none blur-xl bg-gradient-to-b ${glows.gradient}`} />
+                          
+                          <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 z-10">
+                            <SocialIcon className={`w-4.5 h-4.5 text-white/80 ${glows.text} transition-colors`} />
+                          </div>
+                          <span className="text-xs font-bold text-white/90 z-10">{link.platform}</span>
+                          <span className="text-[9px] text-white/40 group-hover:text-white/60 transition-colors truncate w-full max-w-full z-10 mt-0.5">
+                            {link.username}
+                          </span>
+                        </a>
+                      );
+                    })}
+                </div>
+              </motion.div>
+
+              {/* Share Card Button (Clean glass badge) */}
+              <motion.div variants={itemVariants} className="mt-2">
                 <button
                   onClick={handleShare}
-                  className="w-full relative overflow-hidden border border-[#657f66]/20 hover:border-[#657f66]/30 bg-white/40 hover:bg-white/80 text-[#4a634b] py-3 rounded-xl flex items-center justify-center gap-2 text-xs transition-all active:scale-[0.98] cursor-pointer font-bold outline-none focus-visible:ring-2 focus-visible:ring-[#657f66]/50"
+                  className="relative overflow-hidden border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/25 text-white/60 hover:text-white/90 py-2.5 px-6 rounded-xl flex items-center justify-center gap-2 text-xs transition-all active:scale-[0.98] cursor-pointer font-medium w-fit mx-auto outline-none focus-visible:ring-2 focus-visible:ring-[#f8b97e]/50"
                 >
                   <AnimatePresence mode="wait">
                     {copied ? (
                       <motion.span
                         key="copied"
-                        initial={{ scale: 0.8, opacity: 0 }}
+                        initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.8, opacity: 0 }}
-                        className="flex items-center gap-2 text-green-600 font-semibold"
+                        exit={{ scale: 0.9, opacity: 0 }}
+                        className="flex items-center gap-1.5 text-[#f8b97e] font-semibold"
                       >
-                        <Check className="w-4 h-4" />
-                        تم نسخ الرابط بنجاح!
+                        <Check className="w-3.5 h-3.5" />
+                        تم نسخ رابط الصفحة!
                       </motion.span>
                     ) : (
                       <motion.span
                         key="share"
-                        initial={{ scale: 0.8, opacity: 0 }}
+                        initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.8, opacity: 0 }}
-                        className="flex items-center gap-2"
+                        exit={{ scale: 0.9, opacity: 0 }}
+                        className="flex items-center gap-1.5"
                       >
-                        <Share2 className="w-4 h-4" />
-                        مشاركة هذه البطاقة الرقمية
+                        <Share2 className="w-3.5 h-3.5" />
+                        مشاركة البطاقة الرقمية
                       </motion.span>
                     )}
                   </AnimatePresence>
@@ -394,11 +416,11 @@ export default function DigitalCard() {
           </div>
 
           {/* Footer */}
-          <footer className="w-full text-center py-5 border-t border-[#657f66]/5">
-            <p className="text-[10px] text-[#4a634b]/40 tracking-wider font-semibold">
+          <footer className="w-full text-center py-5 border-t border-white/5 bg-black/20">
+            <p className="text-[9px] text-white/30 tracking-wider">
               جميع الحقوق محفوظة © فستكا {new Date().getFullYear()}
             </p>
-            <p className="text-[9px] text-[#4a634b]/30 mt-0.5 font-semibold">
+            <p className="text-[8px] text-white/20 mt-0.5">
               صُنع بشغف لتقديم شوكولاتة يمنية فاخرة
             </p>
           </footer>
@@ -407,3 +429,4 @@ export default function DigitalCard() {
     </div>
   );
 }
+
