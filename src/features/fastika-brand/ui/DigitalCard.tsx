@@ -188,7 +188,7 @@ export default function DigitalCard() {
                 {brandInfo.nameAr}
               </h1>
               <p className="text-[#f8b97e] font-semibold text-xs tracking-widest uppercase opacity-90">
-                Fastika Chocolate
+                Chocolate
               </p>
 
               {/* Custom Elegant Divider */}
