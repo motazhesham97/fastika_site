@@ -14,11 +14,22 @@ import {
   Share2, 
   Check,
   Instagram,
-  Facebook,
-  Music
+  Facebook
 } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+// Custom official TikTok logo SVG component
+const TiktokIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    stroke="none"
+    {...props}
+  >
+    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.63 4.19 1.1 1.25 2.66 2.05 4.31 2.25v3.83c-1.39-.07-2.76-.55-3.95-1.3-1.07-.69-1.95-1.67-2.51-2.83-.02 2.25-.01 4.51-.01 6.76 0 1.29-.2 2.58-.69 3.77-1 2.45-3.32 4.15-5.96 4.34-2.83.2-5.61-1.31-6.72-3.92-1.23-2.9-.1-6.43 2.63-8.08 1.34-.81 2.95-1.1 4.49-.82V12.1c-.81-.14-1.66-.02-2.39.37-.87.47-1.46 1.34-1.58 2.33-.2 1.65.88 3.25 2.5 3.52 1.76.3 3.42-.81 3.73-2.54.06-.32.07-.65.07-.97V.02z" />
+  </svg>
+);
 
 // Ambient background floating particles using secondary highlights (#f8b97e, #ffffff) over the primary green background
 const floatingParticles = [
@@ -74,18 +85,18 @@ export default function DigitalCard() {
   };
 
   const instagramLink = socialLinks.find(link => link.platform === "انستقرام") || {
-    url: "https://instagram.com/fastika",
-    username: "@fastika"
+    url: "https://www.instagram.com/fastika_choco?igsh=ODZwa25teHh2aWZq",
+    username: "@fastika_choco"
   };
 
   const tikTokLink = socialLinks.find(link => link.platform === "تيك توك") || {
-    url: "https://tiktok.com/@fastika",
-    username: "@fastika"
+    url: "https://www.tiktok.com/@fastika_choco?_r=1&_t=ZS-96t0VR7SD80",
+    username: "@fastika_choco"
   };
 
   const facebookLink = socialLinks.find(link => link.platform === "فيسبوك") || {
-    url: "https://facebook.com/fastika",
-    username: "فستكا"
+    url: "https://www.facebook.com/share/1E5d15HTJu/",
+    username: "فستيكا"
   };
 
   const containerVariants = {
@@ -149,25 +160,25 @@ export default function DigitalCard() {
           {/* Card Header */}
           <div className="relative pt-12 pb-6 px-6 text-center overflow-hidden">
             <div className="relative flex flex-col items-center">
-              {/* Logo with clean matte double gold border */}
+              {/* Logo with clean matte gold border */}
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
-                className="relative w-28 h-28 mb-5 cursor-pointer group"
+                className="relative w-32 h-32 mb-5 cursor-pointer group"
                 whileHover={{ scale: 1.02 }}
               >
                 {/* Thin gold accent border */}
-                <div className="absolute inset-0 rounded-full border border-[#f8b97e]/25 group-hover:border-[#f8b97e]/45 transition duration-300" />
+                <div className="absolute inset-0 rounded-full border border-[#f8b97e]/30 group-hover:border-[#f8b97e]/50 transition duration-300 z-10" />
                 
                 {/* Image Container */}
-                <div className="relative w-full h-full rounded-full bg-black/90 p-1.5 flex items-center justify-center overflow-hidden border border-white/5">
+                <div className="relative w-full h-full rounded-full overflow-hidden border border-white/10 shadow-lg">
                   <Image
-                    src="/Asset 1.png"
+                    src="/logo_fastika.png"
                     alt={brandInfo.nameAr}
                     fill
                     priority
-                    className="object-contain p-2 rounded-full"
+                    className="object-cover object-center"
                   />
                 </div>
               </motion.div>
@@ -238,7 +249,7 @@ export default function DigitalCard() {
                   >
                     <div className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 pointer-events-none -left-full group-hover:left-full transition-all duration-1000 ease-in-out" />
                     <Instagram className="w-5 h-5 text-[#182619] transition-transform group-hover:scale-110 duration-300" />
-                    <span className="text-sm tracking-wide">حسابنا على إنستغرام 📸</span>
+                    <span className="text-sm tracking-wide">حسابنا على إنستغرام</span>
                     
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#182619] opacity-75"></span>
@@ -283,7 +294,7 @@ export default function DigitalCard() {
                   >
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none blur-xl bg-rose-500/10" />
                     <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 z-10">
-                      <Music className="w-4.5 h-4.5 text-white/80 group-hover:text-rose-400 transition-colors" />
+                      <TiktokIcon className="w-4.5 h-4.5 text-white/80 group-hover:text-rose-400 transition-colors" />
                     </div>
                     <span className="text-xs font-bold text-white/95 z-10">تيك توك</span>
                     <span className="text-[8px] text-white/40 group-hover:text-white/60 transition-colors truncate w-full max-w-full z-10 mt-0.5">
@@ -349,10 +360,7 @@ export default function DigitalCard() {
           {/* Footer */}
           <footer className="w-full text-center py-5 border-t border-white/5 bg-black/20">
             <p className="text-[9px] text-white/30 tracking-wider">
-              جميع الحقوق محفوظة © فستكا {new Date().getFullYear()}
-            </p>
-            <p className="text-[8px] text-white/20 mt-0.5">
-              صُنع بشغف لتقديم شوكولاتة يمنية فاخرة
+              جميع الحقوق محفوظة © فستيكا {new Date().getFullYear()}
             </p>
           </footer>
         </div>
@@ -360,6 +368,3 @@ export default function DigitalCard() {
     </div>
   );
 }
-
-
-

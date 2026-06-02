@@ -35,8 +35,8 @@ export interface Project {
 }
 
 export const brandInfo = {
-  name: "فستكا",
-  nameAr: "فستكا",
+  name: "فستيكا",
+  nameAr: "فستيكا",
   tagline: "شوكولاتة يمنية فاخرة",
   taglineAr: "شوكولاتة يمنية فاخرة",
   headline: "مُصنوعة بشغف،\nمُصمّمة للتميّز",
@@ -95,28 +95,28 @@ export const projects: Project[] = [
 export const socialLinks: SocialLink[] = [
   {
     platform: "انستقرام",
-    url: "https://instagram.com/fastika",
+    url: "https://www.instagram.com/fastika_choco?igsh=ODZwa25teHh2aWZq",
     icon: Instagram,
-    username: "@fastika",
+    username: "@fastika_choco",
     hoverColor: "hover:text-pink-500",
   },
   {
     platform: "تيك توك",
-    url: "https://tiktok.com/@fastika",
+    url: "https://www.tiktok.com/@fastika_choco?_r=1&_t=ZS-96t0VR7SD80",
     icon: Music,
-    username: "@fastika",
+    username: "@fastika_choco",
     hoverColor: "hover:text-rose-500",
   },
   {
     platform: "فيسبوك",
-    url: "https://facebook.com/fastika",
+    url: "https://www.facebook.com/share/1E5d15HTJu/",
     icon: Facebook,
-    username: "فستكا",
+    username: "فستيكا",
     hoverColor: "hover:text-blue-500",
   },
   {
     platform: "واتساب",
-    url: "https://wa.me/967XXXXXXXX",
+    url: "https://wa.me/message/QL6VTS4VOGA3A1",
     icon: MessageCircle,
     username: "واتساب",
     hoverColor: "hover:text-green-600",
@@ -132,8 +132,8 @@ export const socialLinks: SocialLink[] = [
 
 export const contactInfo = {
   email: "hello@fastika.ye",
-  phone: "+967 XX XXX XXXX",
-  whatsapp: "967XXXXXXXX",
+  phone: "+967 771378814",
+  whatsapp: "message/QL6VTS4VOGA3A1",
   location: "محافظة إب، اليمن",
 };
 
@@ -144,8 +144,8 @@ export const stats = [
 ] as const;
 
 export const seo = {
-  title: "فستكا | شوكولاتة يمنية فاخرة",
+  title: "فستيكا | شوكولاتة يمنية فاخرة",
   description:
-    "فستكا تصنع تجارب شوكولاتة حرفية في اليمن. اكتشف مجموعاتنا، هدايانا المخصصة، وشراكاتنا الفاخرة.",
+    "فستيكا تصنع تجارب شوكولاتة حرفية في اليمن. اكتشف مجموعاتنا، هدايانا المخصصة، وشراكاتنا الفاخرة.",
   ogImage: "/og-fastika.png",
 };
