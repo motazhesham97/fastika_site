@@ -20,11 +20,11 @@ import {
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Ambient background floating particles using approved primary (#657f66) and secondary (#f8b97e, #ffffff) colors
+// Ambient background floating particles using secondary highlights (#f8b97e, #ffffff) over the primary green background
 const floatingParticles = [
-  { size: "w-72 h-72 sm:w-96 sm:h-96", color: "bg-[#657f66]/15", x: ["-10%", "90%"], y: ["10%", "40%"], duration: 25 },
-  { size: "w-80 h-80 sm:w-[450px] sm:h-[450px]", color: "bg-[#f8b97e]/10", x: ["100%", "10%"], y: ["60%", "30%"], duration: 30 },
-  { size: "w-64 h-64 sm:w-80 sm:h-80", color: "bg-white/5", x: ["20%", "70%"], y: ["90%", "10%"], duration: 35 },
+  { size: "w-72 h-72 sm:w-96 sm:h-96", color: "bg-white/12", x: ["-10%", "90%"], y: ["10%", "40%"], duration: 25 },
+  { size: "w-80 h-80 sm:w-[450px] sm:h-[450px]", color: "bg-[#f8b97e]/12", x: ["100%", "10%"], y: ["60%", "30%"], duration: 30 },
+  { size: "w-64 h-64 sm:w-80 sm:h-80", color: "bg-white/8", x: ["20%", "70%"], y: ["90%", "10%"], duration: 35 },
 ];
 
 export default function DigitalCard() {
@@ -104,7 +104,7 @@ export default function DigitalCard() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-[#0F1711] via-[#090E0A] to-[#050805] min-h-screen relative flex flex-col items-center justify-center py-6 px-4 sm:py-12 overflow-x-hidden">
+    <div className="bg-gradient-to-b from-[#759376] via-[#657f66] to-[#556b56] min-h-screen relative flex flex-col items-center justify-center py-6 px-4 sm:py-12 overflow-x-hidden">
       
       {/* 1. Ambient Background Particles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
@@ -139,17 +139,17 @@ export default function DigitalCard() {
         initial={{ opacity: 0, y: 30, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.6, ease }}
-        className="w-full sm:max-w-md z-10 p-[1px] bg-gradient-to-tr from-white/10 via-[#657f66]/30 to-white/10 hover:via-[#f8b97e]/30 rounded-[32px] transition-all duration-700 shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col flex-1 sm:flex-initial"
+        className="w-full sm:max-w-md z-10 p-[1px] bg-gradient-to-tr from-white/20 via-[#f8b97e]/35 to-white/20 hover:via-white/50 rounded-[32px] transition-all duration-700 shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-col flex-1 sm:flex-initial"
       >
         {/* Inner Card Wrapper */}
         <div 
-          className="bg-[#0B0F0B]/85 backdrop-blur-3xl rounded-[31px] overflow-hidden flex flex-col flex-1 sm:flex-initial border border-white/5"
+          className="bg-[#0A120B]/80 backdrop-blur-3xl rounded-[31px] overflow-hidden flex flex-col flex-1 sm:flex-initial border border-white/10"
           style={{ transform: "translateZ(10px)" }}
         >
           {/* Card Header */}
           <div className="relative pt-12 pb-6 px-6 text-center overflow-hidden">
             {/* Header Radial Aura */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-[#657f66]/5 blur-3xl pointer-events-none" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-[#f8b97e]/5 blur-3xl pointer-events-none" />
 
             <div className="relative flex flex-col items-center">
               {/* Logo with Spin Orbit Ring */}
@@ -210,42 +210,42 @@ export default function DigitalCard() {
               animate="show"
               className="w-full flex flex-col gap-5.5"
             >
-              {/* PRIMARY CTAS (WhatsApp & Instagram stacked with equal prominence) */}
+              {/* PRIMARY CTAS (Harmonized White & Gold stacked buttons with matching text colors) */}
               <div className="flex flex-col gap-3.5">
-                {/* WhatsApp Button (Primary Green Brand Color #657f66) */}
+                {/* WhatsApp Button (Solid White #ffffff - Secondary Color) */}
                 <motion.div variants={itemVariants}>
                   <a
                     href={`https://wa.me/${contactInfo.whatsapp}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full relative overflow-hidden bg-[#657f66] hover:bg-[#7a997b] text-white font-extrabold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-[0_4px_20px_rgba(101,127,102,0.3)] hover:shadow-[0_4px_25px_rgba(101,127,102,0.5)] group text-center"
+                    className="w-full relative overflow-hidden bg-white hover:bg-white/90 text-[#182619] font-extrabold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-[0_4px_20px_rgba(255,255,255,0.12)] group text-center"
                   >
-                    <div className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 pointer-events-none -left-full group-hover:left-full transition-all duration-1000 ease-in-out" />
-                    <MessageCircle className="w-5 h-5 text-white transition-transform group-hover:rotate-12 duration-300" />
+                    <div className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-black/[0.03] to-transparent -skew-x-12 pointer-events-none -left-full group-hover:left-full transition-all duration-1000 ease-in-out" />
+                    <MessageCircle className="w-5 h-5 text-[#182619] transition-transform group-hover:rotate-12 duration-300" />
                     <span className="text-sm tracking-wide">اطلب وتواصل معنا عبر واتساب</span>
                     
                     <span className="relative flex h-2.5 w-2.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#657f66] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#657f66]"></span>
                     </span>
                   </a>
                 </motion.div>
 
-                {/* Instagram Button (Secondary Orange-Gold Color #f8b97e) */}
+                {/* Instagram Button (Solid Gold #f8b97e - Secondary Color) */}
                 <motion.div variants={itemVariants}>
                   <a
                     href={instagramLink.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full relative overflow-hidden bg-[#f8b97e] hover:bg-[#e5a56d] text-black font-extrabold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-[0_4px_20px_rgba(248,185,126,0.25)] hover:shadow-[0_4px_25px_rgba(248,185,126,0.45)] group text-center"
+                    className="w-full relative overflow-hidden bg-[#f8b97e] hover:bg-[#e5a56d] text-[#182619] font-extrabold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-[0_4px_20px_rgba(248,185,126,0.18)] group text-center"
                   >
                     <div className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 pointer-events-none -left-full group-hover:left-full transition-all duration-1000 ease-in-out" />
-                    <Instagram className="w-5 h-5 text-black transition-transform group-hover:scale-110 duration-300" />
+                    <Instagram className="w-5 h-5 text-[#182619] transition-transform group-hover:scale-110 duration-300" />
                     <span className="text-sm tracking-wide">تابع حسابنا على انستقرام</span>
                     
                     <span className="relative flex h-2.5 w-2.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-black"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#182619] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#182619]"></span>
                     </span>
                   </a>
                 </motion.div>
@@ -363,5 +363,6 @@ export default function DigitalCard() {
     </div>
   );
 }
+
 
 
