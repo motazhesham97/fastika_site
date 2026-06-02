@@ -148,26 +148,20 @@ export default function DigitalCard() {
         >
           {/* Card Header */}
           <div className="relative pt-12 pb-6 px-6 text-center overflow-hidden">
-            {/* Header Radial Aura */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-[#f8b97e]/5 blur-3xl pointer-events-none" />
-
             <div className="relative flex flex-col items-center">
-              {/* Logo with Spin Orbit Ring */}
+              {/* Logo with clean matte double gold border */}
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
                 className="relative w-28 h-28 mb-5 cursor-pointer group"
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.02 }}
               >
-                {/* Double Glow Layer */}
-                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#657f66] to-[#f8b97e] opacity-35 blur-md group-hover:opacity-60 transition duration-700 animate-pulse" />
-                
-                {/* Rotating Border Frame */}
-                <div className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-tr from-[#657f66] via-[#f8b97e] to-[#657f66] animate-[spin_12s_linear_infinite]" />
+                {/* Thin gold accent border */}
+                <div className="absolute inset-0 rounded-full border border-[#f8b97e]/25 group-hover:border-[#f8b97e]/45 transition duration-300" />
                 
                 {/* Image Container */}
-                <div className="relative w-full h-full rounded-full bg-black/85 p-1 flex items-center justify-center overflow-hidden">
+                <div className="relative w-full h-full rounded-full bg-black/90 p-1.5 flex items-center justify-center overflow-hidden border border-white/5">
                   <Image
                     src="/Asset 1.png"
                     alt={brandInfo.nameAr}
@@ -182,20 +176,23 @@ export default function DigitalCard() {
               <h1 className="text-3xl font-black tracking-tight text-white mb-0.5">
                 {brandInfo.nameAr}
               </h1>
-              <p className="text-[#f8b97e] font-semibold text-xs tracking-widest uppercase opacity-95">
+              <p className="text-[#f8b97e] font-semibold text-xs tracking-widest uppercase opacity-90">
                 Fastika Chocolate
               </p>
 
               {/* Custom Elegant Divider */}
               <div className="flex items-center justify-center gap-3 my-4.5" aria-hidden="true">
-                <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#f8b97e]/40" />
-                <div className="w-1.5 h-1.5 rounded-full bg-[#f8b97e] shadow-[0_0_8px_#f8b97e] animate-pulse" />
-                <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#f8b97e]/40" />
+                <div className="w-10 h-[1px] bg-gradient-to-r from-transparent to-[#f8b97e]/35" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#f8b97e] opacity-80" />
+                <div className="w-10 h-[1px] bg-gradient-to-l from-transparent to-[#f8b97e]/35" />
               </div>
 
-              {/* Description */}
-              <p className="text-white/80 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto font-light">
-                {brandInfo.description}
+              {/* Service description tagline */}
+              <h2 className="text-[#f8b97e] text-base font-extrabold mb-1 drop-shadow-sm">
+                حلاوتها في تفاصيلها ✨
+              </h2>
+              <p className="text-white/80 text-xs leading-relaxed max-w-xs mx-auto font-light">
+                وجهتك الأولى لبوكسات الهدايا الفاخرة وتجهيز المناسبات.
               </p>
             </div>
           </div>
@@ -212,40 +209,40 @@ export default function DigitalCard() {
             >
               {/* PRIMARY CTAS (Harmonized White & Gold stacked buttons with matching text colors) */}
               <div className="flex flex-col gap-3.5">
-                {/* WhatsApp Button (Solid White #ffffff - Secondary Color) */}
+                {/* WhatsApp Button (Solid White #ffffff) */}
                 <motion.div variants={itemVariants}>
                   <a
                     href={`https://wa.me/${contactInfo.whatsapp}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full relative overflow-hidden bg-white hover:bg-white/90 text-[#182619] font-extrabold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-[0_4px_20px_rgba(255,255,255,0.12)] group text-center"
+                    className="w-full relative overflow-hidden bg-white hover:bg-white/90 text-[#182619] font-extrabold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer shadow-[0_4px_15px_rgba(255,255,255,0.1)] group text-center"
                   >
-                    <div className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-black/[0.03] to-transparent -skew-x-12 pointer-events-none -left-full group-hover:left-full transition-all duration-1000 ease-in-out" />
+                    <div className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-black/[0.02] to-transparent -skew-x-12 pointer-events-none -left-full group-hover:left-full transition-all duration-1000 ease-in-out" />
                     <MessageCircle className="w-5 h-5 text-[#182619] transition-transform group-hover:rotate-12 duration-300" />
-                    <span className="text-sm tracking-wide">اطلب وتواصل معنا عبر واتساب</span>
+                    <span className="text-sm tracking-wide">الطلب والاستفسار (واتساب)</span>
                     
-                    <span className="relative flex h-2.5 w-2.5">
+                    <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#657f66] opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#657f66]"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#657f66]"></span>
                     </span>
                   </a>
                 </motion.div>
 
-                {/* Instagram Button (Solid Gold #f8b97e - Secondary Color) */}
+                {/* Instagram Button (Solid Gold #f8b97e) */}
                 <motion.div variants={itemVariants}>
                   <a
                     href={instagramLink.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full relative overflow-hidden bg-[#f8b97e] hover:bg-[#e5a56d] text-[#182619] font-extrabold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-[0_4px_20px_rgba(248,185,126,0.18)] group text-center"
+                    className="w-full relative overflow-hidden bg-[#f8b97e] hover:bg-[#e5a56d] text-[#182619] font-extrabold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer shadow-[0_4px_15px_rgba(248,185,126,0.15)] group text-center"
                   >
-                    <div className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 pointer-events-none -left-full group-hover:left-full transition-all duration-1000 ease-in-out" />
+                    <div className="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 pointer-events-none -left-full group-hover:left-full transition-all duration-1000 ease-in-out" />
                     <Instagram className="w-5 h-5 text-[#182619] transition-transform group-hover:scale-110 duration-300" />
-                    <span className="text-sm tracking-wide">تابع حسابنا على انستقرام</span>
+                    <span className="text-sm tracking-wide">حسابنا على إنستغرام 📸</span>
                     
-                    <span className="relative flex h-2.5 w-2.5">
+                    <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#182619] opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#182619]"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#182619]"></span>
                     </span>
                   </a>
                 </motion.div>
